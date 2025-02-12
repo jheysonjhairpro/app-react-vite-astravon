@@ -1,0 +1,66 @@
+/* Estilos de plugins */
+@import url("../src/assets/plugins/simplebar/css/simplebar.css");
+@import url("../src/assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css");
+@import url("../src/assets/plugins/metismenu/css/metisMenu.min.css");
+
+/* Estilos del loader */
+@import url("../src/assets/css/pace.min.css");
+
+/* Estilos de Bootstrap */
+@import url("../src/assets/css/bootstrap.min.css");
+@import url("../src/assets/css/bootstrap-extended.css");
+
+/* Estilos de la aplicación */
+@import url("../src/assets/css/app.css");
+@import url("../src/assets/css/icons.css");
+
+@import url("../src/assets/plugins/datatable/css/dataTables.bootstrap5.min.css");
+
+/* Estilos de la aplicación */
+@import url("../src/assets/plugins/vectormap/jquery-jvectormap-2.0.2.css");
+
+.disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+  opacity: 0.5;
+}
+.table-wrapper {
+  max-height: 490px;
+  overflow-y: auto;
+}
+
+.card {
+  position: relative;
+  overflow: hidden; 
+}
+.triangle {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 110px 110px 0; 
+  border-color: transparent #2a81d2 transparent transparent; 
+}
+.disabled-card {
+  pointer-events: none;
+  
+  opacity: 0.5;
+  position: relative;
+}
+
+.lock-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  
+}
+
+.lock-icon {
+  width: 50px;
+  height: 50px;
+  color: #18407D;
+}
