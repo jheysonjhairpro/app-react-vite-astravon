@@ -1,9 +1,7 @@
 import { useEffect } from "react";
 import { Outlet, NavLink } from "react-router-dom";
 
-
 function AppLayout() {
-
   // ---------------------------------------------------------------- SCRIPTS
   useEffect(() => {
     const scriptPaths = [
@@ -105,25 +103,28 @@ function AppLayout() {
               <div className="mobile-toggle-menu">
                 <i className="bx bx-menu" />
               </div>
-
-              <div className="nav-search ms-auto d-flex align-items-center gap-3">
-                <form className="d-flex" role="search">
+              <div className="nav-search ms-auto d-flex align-items-center w-25">
+                <form
+                  className="d-flex align-items-center gap-2 w-100"
+                  role="search"
+                >
                   <input
-                    className="form-control me-2 bg-brown-light "
+                    className="form-control bg-brown-light flex-grow-1 me-2"
                     type="text"
                     placeholder="Buscar..."
                     aria-label="Search"
                   />
-                  <button className="btn btn-outline-light" type="submit">
-                    <i className="bx bx-search"></i>
+                  <button className="btn btn-primary px-2" type="submit">
+                    <i className="bx bx-search fs-5"></i>
                   </button>
                 </form>
               </div>
             </nav>
           </div>
         </header>
-
-        <Outlet />
+        <div className="page-wrapper">
+          <Outlet />
+        </div>
         <div className="overlay toggle-icon" />
         <a href="#" className="back-to-top">
           <i className="bx bxs-up-arrow-alt" />

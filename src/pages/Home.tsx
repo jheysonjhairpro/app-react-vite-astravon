@@ -1,129 +1,29 @@
-import { FaLock, FaUnlock, FaUserLock } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
-import { Event } from "../types/Events";
-import Modal from "react-bootstrap/Modal";
-import Button from "react-bootstrap/Button";
-import { useEffect, useMemo, useState } from "react";
-import {
-  DeleteEvent,
-  getAllEvents,
-  updateEvent,
-} from "../services/EventService";
-import { Loading } from "../components/ui/Loading";
-import { formatDate } from "../utils/common";
-import Swal from "sweetalert2";
+import { Post } from "./components/Post";
+import { ReelsCarousel } from "./components/ReelsCarousel";
+
 export function HomePage() {
-  const navigate = useNavigate();
-  const [events, setEvents] = useState<Event[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  //---------------------------------------------------------------- GET ALL EVENTS
-  useEffect(() => {
-    const fetchEvents = async () => {
-      try {
-        const eventList = await getAllEvents();
-        setEvents(eventList);
-      } catch (err: any) {
-        throw new Error(err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchEvents();
-  }, []);
-
-  //---------------------------------------------------------------- DELETE EVENT
-  const handleDeleteEvent = async (id: number) => {
-    try {
-      const result = await Swal.fire({
-        title: "¿Estás seguro?",
-        text: "No podrás revertir esta acción.",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonText: "Sí, eliminar",
-        cancelButtonText: "Cancelar",
-        reverseButtons: true,
-      });
-
-      if (result.isConfirmed) {
-        const response = await DeleteEvent(Number(id));
-
-        if (response.success) {
-          Swal.fire({
-            icon: "success",
-            title: "¡Evento eliminado!",
-            text: response.message,
-            confirmButtonText: "Aceptar",
-          });
-          location.reload();
-        } else {
-          Swal.fire({
-            icon: "error",
-            title: "Error",
-            text: response.message,
-            confirmButtonText: "Aceptar",
-          });
-        }
-      }
-    } catch (error) {
-      Swal.fire({
-        icon: "error",
-        title: "Error",
-        text: "Ups, algo salió mal",
-        confirmButtonText: "Aceptar",
-      });
-    }
-  };
-
-  const [showModal, setShowModal] = useState(false);
-  const [eventToEdit, setEventToEdit] = useState<Event | null>(null);
-
-  const handleEditClick = (event: Event) => {
-    setEventToEdit(event);
-    setShowModal(true);
-  };
-
-  //---------------------------------------------------------------- UPDATE EVENT
-  const handleUpdateEvent = async (updatedEvent: Event) => {
-    try {
-      const response = await updateEvent(updatedEvent);
-      if (response.success) {
-        Swal.fire({
-          icon: "success",
-          title: response.message,
-          text: response.message,
-          confirmButtonText: "Aceptar",
-        });
-        setShowModal(false);
-        const eventList = await getAllEvents();
-        setEvents(eventList);
-      } else {
-        Swal.fire({
-          icon: "error",
-          title: "Error",
-          text: response.message,
-          confirmButtonText: "Aceptar",
-        });
-      }
-    } catch (error) {
-      Swal.fire({
-        icon: "error",
-        title: "Error",
-        text: "Opps, Algo salio mal",
-        confirmButtonText: "Aceptar",
-      });
-    }
-  };
-
-
   return (
-    <div className="page-wrapper">
-      <div className="page-content">
-        <h6 className="mb-0 text-uppercase">Todos los foros</h6>
-        <hr />
+    <div className="page-content">
+      <h6 className="mb-0 text-uppercase text-white">Todos los foros</h6>
+      <hr />
+      <ReelsCarousel />
+      <Post
+        user="Luis Gómez"
+        time="Hace 5 minutos"
+        content="¿Alguien recomienda una buena serie?"
+      />
+      <Post
+        user="Jhair Arone"
+        time="Hace 2 horas"
+        content="Hoy les quiero compartir una imagen donde jale el curso por gil :v"
+        imageUrl="https://static-wc.arcux.net/uploads/20200529130551/la-arquitectura-1.jpg"
+      />
 
-        </div>
+      <Post
+        user="Ana López"
+        time="Hace 30 minutos"
+        videoUrl="https://www.pexels.com/download/video/856048/"
+      />
     </div>
   );
 }
