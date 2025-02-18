@@ -538,13 +538,15 @@ a {
 
   padding-right: 0.5rem;
 
-  color: #6c757d;
+  color: #51504F;
 
   font-family: LineIcons;
 
   content: "\ea5c";
 }
-
+.text-wt{
+  color: #c8c7c6;
+}
 .icon-badge {
   width: 45px;
 
@@ -1664,7 +1666,7 @@ form select.error:focus {
 
   font-size: 18px;
 
-  color: #6c757d;
+  color: #51504F;
 
   text-align: center;
 
@@ -1701,13 +1703,13 @@ form select.error:focus {
 .chat-msg {
   font-size: 13px;
 
-  color: #6c757d;
+  color: #51504F;
 }
 
 .chat-time {
   font-size: 13px;
 
-  color: #6c757d;
+  color: #51504F;
 }
 
 .chat-list {
@@ -1747,7 +1749,7 @@ form select.error:focus {
 
   font-size: 18px;
 
-  color: #6c757d;
+  color: #51504F;
 
   text-align: center;
 
@@ -1815,7 +1817,7 @@ form select.error:focus {
 
   font-size: 24px;
 
-  color: #6c757d;
+  color: #51504F;
 
   border-radius: 50%;
 
@@ -2041,7 +2043,7 @@ form select.error:focus {
 .email-time {
   font-size: 13px;
 
-  color: #6c757d;
+  color: #51504F;
 }
 
 .email-list div.email-message {
@@ -2065,7 +2067,7 @@ form select.error:focus {
 }
 
 .email-star {
-  color: #6c757d;
+  color: #51504F;
 }
 
 .email-read-box {
@@ -2344,6 +2346,15 @@ form select.error:focus {
   border-color: #2F2D2B;
 }
 .split-bg-secondary {
+  background-color: #51504F;
+  border-radius: 10px;
+  border-color: #51504F;
+}
+.podcast-bg-secondary {
+  background-color: #51504F;
+  border-color: #51504F;
+}
+.bg-secondary {
   background-color: #51504F;
   border-radius: 10px;
   border-color: #51504F;

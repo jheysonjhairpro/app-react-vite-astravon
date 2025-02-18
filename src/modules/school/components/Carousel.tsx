@@ -2,6 +2,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const PrevArrow = (props: any) => {
   const { className, style, onClick } = props;
@@ -51,6 +52,11 @@ interface CarouselProps {
 }
 
 export const Carousel = ({ data }: CarouselProps) => {
+  const navigate = useNavigate();
+
+  const handleClick = (id: number) => {
+    navigate(`/school/cursos/${id}`);
+  };
   const settings = {
     dots: true,
     infinite: true,
@@ -63,14 +69,12 @@ export const Carousel = ({ data }: CarouselProps) => {
     autoplaySpeed: 4000,
   };
 
-  // Verifica si hay solo un ítem
   const isSingleItem = data.length === 1;
 
   return (
     <div className="py-4">
       {isSingleItem ? (
-        // Si hay un solo ítem, se muestra directamente
-        <div className="card-container split-bg-secondary">
+        <div className="card-container split-bg-secondary  cursor-pointer"  onClick={() => handleClick(data[0].id)}>
           <div className="row no-gutters">
             <div className="col-12 col-md-4 d-flex flex-column align-items-center p-3">
               <div
@@ -124,10 +128,13 @@ export const Carousel = ({ data }: CarouselProps) => {
           </div>
         </div>
       ) : (
-        // Si hay más de un ítem, se muestra el carrusel
         <Slider {...settings}>
           {data.map((item) => (
-            <div key={item.id} className="card-container split-bg-secondary">
+            <div
+              key={item.id}
+              className="card-container split-bg-secondary  cursor-pointer"
+              onClick={() => handleClick(item.id)}
+            >
               <div className="row no-gutters">
                 <div className="col-12 col-md-4 d-flex flex-column align-items-center p-3">
                   <div
