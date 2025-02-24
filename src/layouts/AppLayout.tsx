@@ -1,7 +1,10 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Outlet, NavLink } from "react-router-dom";
+import SidebarAuth from "../modules/auth/pages/SidebarAuth";
 
 function AppLayout() {
+  const [authType, setAuthType] = useState<"login" | "register">("login");
+
   // ---------------------------------------------------------------- SCRIPTS
   useEffect(() => {
     const scriptPaths = [
@@ -15,7 +18,7 @@ function AppLayout() {
       "../assets/js/app.js",
     ];
 
-    const loadScript = (path: any) => {
+    const loadScript = (path: string) => {
       return new Promise((resolve, reject) => {
         const script = document.createElement("script");
         script.src = path;
@@ -42,8 +45,8 @@ function AppLayout() {
 
   return (
     <>
-      <div className="wrapper ">
-        <div className="sidebar-wrapper  bg-brown" data-simplebar="true">
+      <div className="wrapper">
+        <div className="sidebar-wrapper bg-brown" data-simplebar="true">
           <div className="sidebar-header bg-brown">
             <div>
               <img
@@ -62,7 +65,7 @@ function AppLayout() {
             </div>
           </div>
           <ul className="metismenu" id="menu">
-            <li className="">
+            <li>
               <NavLink to="/">
                 <div className="parent-icon">
                   <i className="bx bx-message-dots" />
@@ -70,7 +73,7 @@ function AppLayout() {
                 <div className="menu-title">Foro</div>
               </NavLink>
             </li>
-            <li className="">
+            <li>
               <NavLink to="/podcast">
                 <div className="parent-icon">
                   <i className="bx bx-headphone" />
@@ -78,8 +81,7 @@ function AppLayout() {
                 <div className="menu-title">Podcast</div>
               </NavLink>
             </li>
-
-            <li className="">
+            <li>
               <NavLink to="/schools">
                 <div className="parent-icon">
                   <i className="bx bx-buildings" />
@@ -87,7 +89,7 @@ function AppLayout() {
                 <div className="menu-title">Escuelas</div>
               </NavLink>
             </li>
-            <li className="">
+            <li>
               <NavLink to="/activities">
                 <div className="parent-icon">
                   <i className="bx bx-time-five" />
@@ -100,10 +102,7 @@ function AppLayout() {
         <header>
           <div className="topbar d-flex align-items-center bg-brown">
             <nav className="navbar navbar-expand gap-3 w-100">
-              <div className="mobile-toggle-menu">
-                <i className="bx bx-menu" />
-              </div>
-              <div className="nav-search ms-auto d-flex align-items-center w-25">
+              <div className="nav-search me-auto d-flex align-items-center w-25">
                 <form
                   className="d-flex align-items-center gap-2 w-100"
                   role="search"
@@ -114,14 +113,35 @@ function AppLayout() {
                     placeholder="Buscar..."
                     aria-label="Search"
                   />
-                  <button className="btn btn-primary px-2" type="submit">
-                    <i className="bx bx-search fs-5"></i>
-                  </button>
                 </form>
+              </div>
+              <div className="mobile-toggle-menu">
+                <i className="bx bx-menu" />
+              </div>
+              <div className="auth-buttons ms-3 d-flex gap-2">
+                <button
+                  className="btn btn-outline-light"
+                  data-bs-toggle="offcanvas"
+                  data-bs-target="#authSidebar"
+                  onClick={() => setAuthType("register")}
+                >
+                  Regístrate
+                </button>
+                <button
+                  className="btn btn-primary"
+                  data-bs-toggle="offcanvas"
+                  data-bs-target="#authSidebar"
+                  onClick={() => setAuthType("login")}
+                >
+                  Iniciar sesión
+                </button>
               </div>
             </nav>
           </div>
+
+          <SidebarAuth tipo={authType} />
         </header>
+
         <div className="page-wrapper">
           <Outlet />
         </div>
